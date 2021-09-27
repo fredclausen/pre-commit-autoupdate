@@ -1,5 +1,8 @@
 name: Pre-commit autoupdate action
 description: Updates pre-commit hooks in pre-commit config.
+branding:
+  color: yellow
+  icon: arrow-up
 inputs:
   extra-args:
     description: String of options to pass to `pre-commit autoupdate` command
