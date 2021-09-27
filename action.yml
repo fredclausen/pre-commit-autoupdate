@@ -1,0 +1,30 @@
+name: Pre-commit autoupdate action
+description: Updates pre-commit hooks in pre-commit config.
+inputs:
+  extra-args:
+    description: String of options to pass to `pre-commit autoupdate` command
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-python@v2
+
+    - name: Set PY
+      shell: bash
+      run: echo "PY=$(python -VV | sha256sum | cut -d' ' -f1)" >> $GITHUB_ENV
+
+    - uses: actions/cache@v2
+      with:
+        path: |
+          ~/.cache/pre-commit
+          ~/.cache/pip
+        key: pre-commit-${{ env.PY }}-${{ hashFiles('.pre-commit-config.yaml') }}
+
+    - name: Install pre-commit
+      shell: bash
+      run: pip install -U pre-commit
+
+    - name: Run `pre-commit autoupdate`
+      shell: bash
+      run: pre-commit autoupdate --color=always ${{ inputs.extra-args}}
