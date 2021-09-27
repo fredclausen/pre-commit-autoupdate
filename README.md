@@ -10,9 +10,8 @@ Here's example workflow that runs `pre-commit autoupdate` and creates a PR:
 name: Autoupdate pre-commit hooks
 
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: 0 7 * * 1
 
 jobs:
   pre-commit-autoupdate:
