@@ -1,4 +1,4 @@
-# vrslev/pre-commit-autoupdate
+# fredclausen/pre-commit-autoupdate
 
 GitHub action to autoupdate pre-commit hooks in pre-commit config.
 
